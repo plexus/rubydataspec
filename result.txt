@@ -1,0 +1,46 @@
+Compares Persistent::Vector, Hamster::Vector, arrays with transient semantics and arrays with persistent (copy before update) semantics. Requires a modified Hamster for Hamster::Vector[].
+
+$ jruby --version
+jruby 9000.dev-SNAPSHOT (2.1.2) 2014-05-01 ae5ad64 on OpenJDK 64-Bit Server VM 1.7.0_55-b14 [linux-amd64]
+
+$ java -version
+java version "1.7.0_55"
+OpenJDK Runtime Environment (IcedTea 2.4.7) (7u55-2.4.7-1ubuntu1)
+OpenJDK 64-Bit Server VM (build 24.51-b03, mixed mode)
+
+$ RUBYOPT='-I../persistent_data_structures/lib -I../hamster/lib' ruby bench/bench.rb
+
+Calculating -------------------------------------
+Persistent::Vector from Array
+                            18 i/100ms
+Persistent::Vector#add
+                             2 i/100ms
+-------------------------------------------------
+Persistent::Vector from Array
+                          289.7 (±4.5%) i/s -       1458 in   5.044000s
+Persistent::Vector#add
+                           25.7 (±11.7%) i/s -        128 in   5.072000s
+Calculating -------------------------------------
+Hamster::Vector from Array
+                             1 i/100ms
+ Hamster::Vector#add         1 i/100ms
+-------------------------------------------------
+Hamster::Vector from Array
+                            0.6 (±0.0%) i/s -          3 in   5.414000s
+ Hamster::Vector#add        0.3 (±0.0%) i/s -          2 in   7.016000s
+Calculating -------------------------------------
+TransientArray from Array
+                           865 i/100ms
+  TransientArray#add         6 i/100ms
+-------------------------------------------------
+TransientArray from Array
+                         9543.7 (±5.8%) i/s -      47575 in   5.002000s
+  TransientArray#add       69.7 (±7.2%) i/s -        348 in   5.026000s
+Calculating -------------------------------------
+PersistentArray from Array
+                           878 i/100ms
+ PersistentArray#add         1 i/100ms
+-------------------------------------------------
+PersistentArray from Array
+                         9611.0 (±3.6%) i/s -      48290 in   5.031000s
+ PersistentArray#add        0.0 (±0.0%) i/s -          1 in  42.951000s
