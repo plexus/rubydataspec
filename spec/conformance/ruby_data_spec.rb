@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'ruby_data/persistent_vector'
 
-describe RubyData::PersitentVector do
+describe RubyData::PersistentVector do
   it_should_behave_like 'PersistentVector'
 end

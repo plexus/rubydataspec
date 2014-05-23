@@ -1,5 +1,5 @@
 module RubyData
-  class PersitentVector < Array
+  class PersistentVector < Array
     def prepend(item)
       self.class[item, *self]
     end
