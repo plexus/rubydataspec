@@ -35,9 +35,9 @@ shared_examples_for 'Vector' do
     end
   end
 
-  describe '#cons' do
+  describe '#add' do
     it 'should append' do
-      expect(vector.cons(1).cons(:b)).to eql describe_class[1, :b]
+      expect(vector.add(1).add(:b)).to eql described_class[1, :b]
     end
   end
 

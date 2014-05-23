@@ -11,7 +11,7 @@ module RubyData
     alias add append
 
     def eql?(other)
-      self.class.equal? other.class && super
+      self.class.equal?(other.class) && super
     end
 
     def inspect
