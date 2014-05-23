@@ -1,4 +1,4 @@
-shared_examples_for 'Vector' do
+shared_examples_for 'PersistentVector' do
   subject(:vector) { described_class[] }
 
   describe '.[]' do

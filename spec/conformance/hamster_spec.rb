@@ -3,9 +3,9 @@ begin
   require 'hamster'
 
   describe Hamster::Vector do
-    it_behaves_like 'Vector'
+    it_should_behave_like 'PersistentVector'
   end
 
-rescue LoadError => e
+rescue Object => e
   $stderr.puts "Skipping Hamster, #{e}"
 end

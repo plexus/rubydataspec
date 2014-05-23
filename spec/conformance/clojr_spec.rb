@@ -3,9 +3,9 @@ begin
   require 'clojr'
 
   describe Clojr::Persistent::Vector do
-    it_behaves_like 'Vector'
+    it_should_behave_like 'PersistentVector'
   end
 
-rescue LoadError => e
+rescue Object => e
   $stderr.puts "Skipping Clojr, #{e}"
 end
