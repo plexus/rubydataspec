@@ -1,36 +1,30 @@
 require 'benchmark/ips'
-
-# For comparison
-class TransientArray < Array
-  def add(x)
-    self << x
-  end
-end
-
-class PersistentArray < Array
-  def add(x)
-    self.dup << x
-  end
-end
+require 'ruby_data/vector'
 
 classes_to_test = []
 
 begin
   require 'persistent_data_structure'
   classes_to_test << Persistent::Vector
-rescue LoadError => e
+rescue Object => e
   $stderr.puts "Skipping Persistent::Vector, #{e}"
 end
 
 begin
   require 'hamster'
   classes_to_test << Hamster::Vector
-rescue LoadError => e
+rescue Object => e
   $stderr.puts "Skipping Hamster::Vector, #{e}"
 end
 
-classes_to_test << TransientArray
-classes_to_test << PersistentArray
+begin
+  require 'clojr'
+  classes_to_test << Clojr::Persistent::Vector
+rescue Object => e
+  $stderr.puts "Skipping Clojr::Persistent::Collection::Vector, #{e}"
+end
+
+classes_to_test << RubyData::Vector
 
 classes_to_test.each do |klass|
   Benchmark.ips do |x|
