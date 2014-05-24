@@ -22,6 +22,8 @@ The proposed spec so far, for all persistent collections:
 * `==` should follow Ruby type coercion rules, e.g. for vectors or lists it should call `to_ary` on an object that implements it. `Vector[1,2,3] == [1,2,3] #=> true`. Similarly a map should check for `to_hash`
 * `add` adds an element to the collection in the most efficient way. For a cons-based list this means adding it to the front, for a vector it would add it to the back.
 
+Other methods that should be implemented with the usual semantics: 'include?', 'each'.
+
 In addition to the above, list-like data types like vectors or lists, should implement the following:
 
 * `to_a`, `to_ary`, returning a plain Ruby array

@@ -4,6 +4,7 @@ ROOT = Pathname(__FILE__).dirname.parent
 
 $LOAD_PATH.unshift ROOT.join('lib').to_s
 
+require 'persistent_collection_spec'
 require 'persistent_vector_spec'
 
 
