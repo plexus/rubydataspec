@@ -1,46 +1,102 @@
-Compares Persistent::Vector, Hamster::Vector, arrays with transient semantics and arrays with persistent (copy before update) semantics. Requires a modified Hamster for Hamster::Vector[].
-
-$ jruby --version
-jruby 9000.dev-SNAPSHOT (2.1.2) 2014-05-01 ae5ad64 on OpenJDK 64-Bit Server VM 1.7.0_55-b14 [linux-amd64]
-
-$ java -version
-java version "1.7.0_55"
-OpenJDK Runtime Environment (IcedTea 2.4.7) (7u55-2.4.7-1ubuntu1)
-OpenJDK 64-Bit Server VM (build 24.51-b03, mixed mode)
-
-$ RUBYOPT='-I../persistent_data_structures/lib -I../hamster/lib' ruby bench/bench.rb
-
 Calculating -------------------------------------
-Persistent::Vector from Array
+Persistent::Vector[1000 items]
+                          2834 i/100ms
+Persistent::Vector[100_000 items]
+                            29 i/100ms
+Persistent::Vector#add - small
+                           323 i/100ms
+Persistent::Vector#add - big
+                             3 i/100ms
+Persistent::Vector#to_a
+                            13 i/100ms
+Persistent::Vector#inspect
+                             1 i/100ms
+-------------------------------------------------
+Persistent::Vector[1000 items]
+                        31831.6 (±4.4%) i/s -     158704 in   4.996000s
+Persistent::Vector[100_000 items]
+                          299.5 (±4.7%) i/s -       1508 in   5.046000s
+Persistent::Vector#add - small
+                         3305.3 (±5.7%) i/s -      16473 in   5.000000s
+Persistent::Vector#add - big
+                           33.0 (±6.1%) i/s -        165 in   5.010000s
+Persistent::Vector#to_a
+                          213.0 (±7.0%) i/s -       1066 in   5.033000s
+Persistent::Vector#inspect
+                           10.2 (±9.8%) i/s -         51 in   5.018000s
+Calculating -------------------------------------
+Hamster::Vector[1000 items]
+                             7 i/100ms
+Hamster::Vector[100_000 items]
+                             1 i/100ms
+Hamster::Vector#add - small
+                             7 i/100ms
+Hamster::Vector#add - big
+                             1 i/100ms
+Hamster::Vector#to_a         1 i/100ms
+Hamster::Vector#inspect
+                             1 i/100ms
+-------------------------------------------------
+Hamster::Vector[1000 items]
+                           78.7 (±15.3%) i/s -        385 in   5.067000s
+Hamster::Vector[100_000 items]
+                            0.7 (±0.0%) i/s -          4 in   5.847000s
+Hamster::Vector#add - small
+                           81.0 (±16.1%) i/s -        392 in   5.028000s
+Hamster::Vector#add - big
+                            0.7 (±0.0%) i/s -          4 in   5.630000s
+Hamster::Vector#to_a       38.0 (±10.5%) i/s -        187 in   5.007000s
+Hamster::Vector#inspect
+                           13.7 (±7.3%) i/s -         68 in   5.046000s
+Calculating -------------------------------------
+Clojr::Persistent::Vector[1000 items]
+                          1812 i/100ms
+Clojr::Persistent::Vector[100_000 items]
                             18 i/100ms
-Persistent::Vector#add
+Clojr::Persistent::Vector#add - small
+                           592 i/100ms
+Clojr::Persistent::Vector#add - big
+                             5 i/100ms
+Clojr::Persistent::Vector#to_a
+                            20 i/100ms
+Clojr::Persistent::Vector#inspect
+                             1 i/100ms
+-------------------------------------------------
+Clojr::Persistent::Vector[1000 items]
+                        21469.8 (±5.2%) i/s -     108720 in   5.078000s
+Clojr::Persistent::Vector[100_000 items]
+                          193.8 (±5.7%) i/s -        972 in   5.032000s
+Clojr::Persistent::Vector#add - small
+                         5984.6 (±5.7%) i/s -      30192 in   5.061000s
+Clojr::Persistent::Vector#add - big
+                           56.8 (±12.3%) i/s -        280 in   5.041000s
+Clojr::Persistent::Vector#to_a
+                          453.1 (±11.3%) i/s -       2240 in   5.008000s
+Clojr::Persistent::Vector#inspect
+                           17.1 (±11.7%) i/s -         80 in   5.002000s
+Calculating -------------------------------------
+RubyData::PersistentVector[1000 items]
+                         37910 i/100ms
+RubyData::PersistentVector[100_000 items]
+                           960 i/100ms
+RubyData::PersistentVector#add - small
+                            76 i/100ms
+RubyData::PersistentVector#add - big
+                             1 i/100ms
+RubyData::PersistentVector#to_a
+                         69626 i/100ms
+RubyData::PersistentVector#inspect
                              2 i/100ms
 -------------------------------------------------
-Persistent::Vector from Array
-                          289.7 (±4.5%) i/s -       1458 in   5.044000s
-Persistent::Vector#add
-                           25.7 (±11.7%) i/s -        128 in   5.072000s
-Calculating -------------------------------------
-Hamster::Vector from Array
-                             1 i/100ms
- Hamster::Vector#add         1 i/100ms
--------------------------------------------------
-Hamster::Vector from Array
-                            0.6 (±0.0%) i/s -          3 in   5.414000s
- Hamster::Vector#add        0.3 (±0.0%) i/s -          2 in   7.016000s
-Calculating -------------------------------------
-TransientArray from Array
-                           865 i/100ms
-  TransientArray#add         6 i/100ms
--------------------------------------------------
-TransientArray from Array
-                         9543.7 (±5.8%) i/s -      47575 in   5.002000s
-  TransientArray#add       69.7 (±7.2%) i/s -        348 in   5.026000s
-Calculating -------------------------------------
-PersistentArray from Array
-                           878 i/100ms
- PersistentArray#add         1 i/100ms
--------------------------------------------------
-PersistentArray from Array
-                         9611.0 (±3.6%) i/s -      48290 in   5.031000s
- PersistentArray#add        0.0 (±0.0%) i/s -          1 in  42.951000s
+RubyData::PersistentVector[1000 items]
+                       845652.9 (±7.2%) i/s -    4208010 in   5.002000s
+RubyData::PersistentVector[100_000 items]
+                         9810.6 (±4.6%) i/s -      48960 in   5.001000s
+RubyData::PersistentVector#add - small
+                          764.0 (±5.2%) i/s -       3876 in   5.087000s
+RubyData::PersistentVector#add - big
+                            0.1 (±0.0%) i/s -          1 in  10.108000s
+RubyData::PersistentVector#to_a
+                      4633644.6 (±9.4%) i/s -   22906954 in   5.008000s
+RubyData::PersistentVector#inspect
+                           22.5 (±4.4%) i/s -        114 in   5.073000s
